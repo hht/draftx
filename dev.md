@@ -14,7 +14,7 @@
 
 ####Progress
 
-* [ ] 构建基本环境
+* [x] 构建基本环境
 * [ ] 使用 store 初始化 Editor
 * [ ] 编程测试 editorState 和 action 的流转
 * [ ] TODO
