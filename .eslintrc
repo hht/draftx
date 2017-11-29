@@ -1,0 +1,59 @@
+{
+  "extends": ["airbnb"],
+  "plugins": ["babel", "import", "prettier", "react"],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "import/parser": "babel-eslint"
+  },
+  "rules": {
+    //*关闭检查选项,修正meteor包的相关eslint错误
+    "import/no-extraneous-dependencies": "off",
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
+    //关闭import的文件后缀检查
+    "import/extensions": "off",
+    //*自定义配置
+    // 每行最大字符数
+    "max-len": ["error", 80, 2],
+    //语句结尾不用分号
+    "semi": ["error", "never"],
+    //函数参数左括号前使用空格
+    "space-before-function-paren": ["error", "always"],
+    //禁止数组最后一个元素使用逗号
+    "comma-dangle": [2, "never"],
+    //关闭强制对象字面量缩写语法检查
+    "object-shorthand": "off",
+    "prefer-const": "error",
+    //首选展开运算符
+    "prefer-spread": "error",
+    // 允许变量名使用下划线
+    "no-underscore-dangle": "off",
+    //使用单引号
+    "quotes": ["warn", "single"],
+    //代码块必须由花括号包围
+    "curly": [2, "all"],
+    // switch语句强制default分支
+    "default-case": "error",
+    //*react配置
+    "react/jsx-indent": "off", // Incompatible with prettier
+    "react/jsx-closing-bracket-location": "off", // Incompatible with prettier
+    "react/jsx-wrap-multilines": "off", // Incompatible with prettier
+    "react/jsx-indent-props": "off", // Incompatible with prettier
+    "react/require-default-props": "off", // airbnb use error
+    "react/forbid-prop-types": "off", // airbnb use error
+    "react/no-danger": "error", // airbnb is using warn
+    "react/no-direct-mutation-state": "error", // airbnb is disabling this rule
+    "react/no-find-dom-node": "off", // I don"t know
+    "react/no-unused-prop-types": "off", // Is still buggy
+    "react/sort-prop-types": "error", // airbnb do nothing here.
+    "react/jsx-filename-extension": "off",
+    "jsx-a11y/href-no-hash": "off", //关闭控制台此规则告警
+    "react/prop-types": "off", // 原型阶段关闭props验证
+    "jsx-a11y/mouse-events-have-key-events": "off"
+    //"react/no-array-index-key": "off"
+  }
+}
