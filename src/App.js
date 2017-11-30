@@ -1,11 +1,25 @@
 import React from 'react'
+import styled from 'styled-components'
 import Editor from './editor'
 
+const App = styled.div`
+  margin: 0;
+  padding: 0;
+`
+const AppHeader = styled.header`
+  background-color: rgb(23, 123, 238);
+  height: 48px;
+  padding: 8px;
+  color: white;
+`
+const Title = styled.h3`
+  font-size: 1.5em;
+`
 export default () => (
-  <div className="App">
-    <header className="header">
-      <h1 className="title">Welcome to React and Draftx :P</h1>
-    </header>
+  <App>
+    <AppHeader>
+      <Title>A RichText Editor based on draft and rxjs</Title>
+    </AppHeader>
     <Editor />
-  </div>
+  </App>
 )

@@ -29,21 +29,6 @@ module.exports = (config, env, override = f => f) => {
     '@': path.resolve(__dirname, './src/')
   }
 
-  //* 添加scss loader
-  const cssLoader = getLoader(
-    config.module.rules,
-    rule => rule.test && String(rule.test) === String(/\.css$/)
-  )
-
-  const sassLoader = {
-    test: /\.scss$/,
-    use: [...(cssLoader.loader || cssLoader.use), 'sass-loader']
-  }
-  // eslint-disable-next-line
-  const oneOf = config.module.rules.find(rule => rule.oneOf).oneOf
-
-  oneOf.unshift(sassLoader)
-
   //* 使用自定义eslint配置
   const eslintOptions = getEslintOptions(config.module.rules)
   eslintOptions.useEslintrc = true
