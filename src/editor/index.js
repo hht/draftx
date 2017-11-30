@@ -1,9 +1,8 @@
 import React from 'react'
-import { Editor } from 'draft-js'
+import { Editor, Modifier, EditorState } from 'draft-js'
 import { compose } from 'recompose'
 import styled from 'styled-components'
 import { withStore, withProps } from './core/enchancer'
-import { changeEditorState } from './core/action'
 import Toolbar from './component/Toolbar'
 
 const Container = styled.div`
@@ -13,13 +12,40 @@ const Container = styled.div`
     padding: 8px;
   }
 `
+
+const handleBeforeInput = stream$ => (chars, editorState) => {
+  const selection = editorState.getSelection()
+  const startOffset = selection.getStartOffset()
+  const content = editorState.getCurrentContent()
+  const block = content.getBlockForKey(selection.getStartKey())
+  const entity = block.getEntityAt(startOffset)
+
+  if (entity === null) {
+    const style = editorState.getCurrentInlineStyle()
+    const newContent = Modifier.insertText(
+      content,
+      selection,
+      chars,
+      style,
+      null
+    )
+    stream$.next(EditorState.push(editorState, newContent, 'insert-characters'))
+
+    return 'handled'
+  }
+
+  return 'not-handled'
+}
 // eslint-disable-next-line max-len
-export default compose(withStore, withProps({ editorState: el => el }))(({ dispatch, editorState }) => (
+export default compose(withStore, withProps({ editorState: el => el }))(({ editorState$, editorState }) => (
     <Container>
       <Toolbar />
       <Editor
         editorState={editorState}
-        onChange={changeEditorState(dispatch)}
+        handleBeforeInput={handleBeforeInput(editorState$)}
+        onChange={(state) => {
+          editorState$.next(state)
+        }}
       />
     </Container>
 ))

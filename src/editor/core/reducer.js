@@ -37,6 +37,7 @@ const load = (stream$) => {
     decorator
   ))
 }
+
 export default {
   editorState,
   inlineStyle,

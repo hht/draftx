@@ -1,5 +1,6 @@
 import { BehaviorSubject } from 'rxjs/Rx'
 import { EditorState } from 'draft-js'
+// import { isEqual, omit } from 'lodash'
 import Reducer from './reducer'
 import decorator from './decorator'
 import log from '../util/Logger'
@@ -8,7 +9,7 @@ import log from '../util/Logger'
 const handle = stream$ => ([action, currentState]) => {
   const reducer = Reducer[action.type]
   if (typeof reducer === 'function') {
-    Reducer[action.type](stream$, currentState, action)
+    reducer(stream$, currentState, action)
   }
   // TODO dont forget remove it
   log(action, currentState)
@@ -16,6 +17,7 @@ const handle = stream$ => ([action, currentState]) => {
 // eslint-disable-next-line max-len
 export const createStore = (initialState = EditorState.createEmpty(decorator)) => {
   // 为每个Editor创建一个状态流和一个动作流
+  // eslint-disable-next-line max-len
   const editorState$ = new BehaviorSubject(initialState)
   const action$ = new BehaviorSubject({ type: '@INIT' })
   // 订阅接收到的action和最后的EditorState，发送到处理流程
