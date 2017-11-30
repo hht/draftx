@@ -20,8 +20,6 @@ export default () => (
     <AppHeader>
       <Title>A RichText Editor based on draft and rxjs</Title>
     </AppHeader>
-    <Editor>
-      <div>hahah</div>
-    </Editor>
+    <Editor />
   </App>
 )

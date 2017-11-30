@@ -1,1 +1,1 @@
-##A RichText Editor based in draftjs ans rxjs
+##A RichText Editor based on draftjs ans rxjs
