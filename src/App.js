@@ -7,7 +7,7 @@ const App = styled.div`
   padding: 0;
 `
 const AppHeader = styled.header`
-  background-color: rgb(23, 123, 238);
+  background-color: #03a9f4;
   height: 48px;
   padding: 8px;
   color: white;
@@ -20,6 +20,8 @@ export default () => (
     <AppHeader>
       <Title>A RichText Editor based on draft and rxjs</Title>
     </AppHeader>
-    <Editor />
+    <Editor>
+      <div>hahah</div>
+    </Editor>
   </App>
 )
