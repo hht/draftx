@@ -22,13 +22,25 @@ const handleBeforeInput = stream$ => (chars, editorState) => {
 
   if (entity === null) {
     const style = editorState.getCurrentInlineStyle()
-    const newContent = Modifier.insertText(
-      content,
-      selection,
-      chars,
-      style,
-      null
-    )
+    let newContent;
+    
+    if (!selection.isCollapsed()) {
+      newContent = Modifier.replaceText(
+        content,
+        selection,
+        chars,
+        style,
+        null,
+      )
+    } else {
+      newContent = Modifier.insertText(
+        content,
+        selection,
+        chars,
+        style,
+        null
+      )
+    }
     stream$.next(EditorState.push(editorState, newContent, 'insert-characters'))
 
     return 'handled'
